@@ -1,6 +1,8 @@
 const jwt = require('jsonwebtoken');
 const { jwtConfig } = require('../config');
 const { User } = require('../db/models');
+const axios = require('axios');
+const qs = require('qs');
 
 const { secret, expiresIn } = jwtConfig;
 
@@ -26,6 +28,39 @@ const setTokenCookie = (res, user) => {
   });
 
   return token;
+};
+
+const setSpotifyToken = async (req, res, next) => {
+
+  if (Date.now() > process.env.SPTFY_ACCESS_EXPIRES) {
+
+    const data = qs.stringify({
+      'grant_type': 'client_credentials',
+      'client_id': process.env.SPTFY_CLIENT_ID,
+      'client_secret': process.env.SPTFY_CLIENT_SECRET,
+    });
+
+    const config = {
+      method: 'post',
+      url: 'https://accounts.spotify.com/api/token',
+      headers: {
+        'Content-Type': 'application/x-www-form-urlencoded',
+        'Cookie': '__Host-device_id=AQDxXPi0Q5FwjyHyslSZaxoMQqoJy-0yRLgU0Kx3oBGpiANj9uVGO-KGktQjLpEC3bCt7Qyj71hfSMx60mm3z4NsigZRU9t-ypk',
+      },
+      data: data
+    };
+
+    const response = await axios(config);
+    const tokenObj = response.data;
+
+    if (response.status === 200) {
+      process.env.SPTFY_ACCESS_TOKEN = tokenObj.access_token;
+      process.env.SPTFY_ACCESS_EXPIRES = Date.now() + tokenObj.expires_in * 1000;
+    }
+
+  }
+
+  return next();
 };
 
 const restoreUser = (req, res, next) => {
@@ -65,4 +100,4 @@ const requireAuth = [
   }
 ];
 
-module.exports = { setTokenCookie, restoreUser, requireAuth };
+module.exports = { setTokenCookie, restoreUser, requireAuth, setSpotifyToken };

@@ -1,33 +1,61 @@
 import React, { useState, useEffect } from "react";
-import { useDispatch } from "react-redux";
-import { Route, Switch } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+import { Redirect, Route, Switch } from "react-router-dom";
+import SplashPage from "./components/SplashPage";
 import SignupFormPage from "./components/SignupFormPage";
-// import LoginFormPage from "./components/LoginFormPage";
+import LoginFormPage from "./components/LoginFormPage";
 import * as sessionActions from "./store/session";
 import Navigation from "./components/Navigation";
+import ProtectedRoute from "./components/ProtectedRoute";
+import Footer from "./components/Footer";
+
 
 function App() {
   const dispatch = useDispatch();
+  const sessionUser = useSelector(state => state.session.user);
   const [isLoaded, setIsLoaded] = useState(false);
   useEffect(() => {
     dispatch(sessionActions.restoreUser()).then(() => setIsLoaded(true));
   }, [dispatch]);
 
+  // if (sessionUser) {
+  //   return (
+  //     <>
+  //       <Navigation isLoaded={isLoaded} />
+  //       {isLoaded}
+  //     </>
+  //   );
+  // } else {
   return (
     <>
-      <Navigation isLoaded={isLoaded} />
       {isLoaded && (
         <Switch>
-          {/* <Route path="/login" >
+          <Route path='/' exact>
+            <Navigation isLoaded={isLoaded} />
+            <SplashPage />
+            <Footer />
+          </Route>
+          <Route path="/login">
             <LoginFormPage />
-          </Route> */}
+          </Route>
           <Route path="/signup">
             <SignupFormPage />
           </Route>
+          <ProtectedRoute path="/home">
+            <Navigation isLoaded={isLoaded} />
+
+          </ProtectedRoute>
+          <ProtectedRoute path="/user/:id">
+            <Navigation isLoaded={isLoaded} />
+
+          </ProtectedRoute>
+          <Redirect to="/home" />
         </Switch>
       )}
     </>
   );
+  // }
 }
+
 
 export default App;
