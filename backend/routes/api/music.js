@@ -2,8 +2,6 @@ const express = require('express');
 const asyncHandler = require('express-async-handler');
 const axios = require('axios');
 const { setSpotifyToken } = require('../../utils/auth');
-const { request } = require('express');
-
 const router = express.Router();
 
 router.use(setSpotifyToken);
@@ -36,6 +34,7 @@ router.get(
                         image: album.images[0].url,
                         label: album.label,
                         name: album.name,
+                        release_date: album.release_date.split('-')[0],
                         copyrights: album.copyrights.map(copyright => copyright.text),
                         songs: {
                             total: album.total_tracks,
@@ -43,7 +42,12 @@ router.get(
                                 totalDuration += track.duration_ms
                                 return {
                                     name: track.name,
-                                    artists: track.artists.map(artist => artist.name),
+                                    artists: track.artists.map(artist => {
+                                        return {
+                                            name: artist.name,
+                                            id: artist.id,
+                                        }
+                                    }),
                                     duration: track.duration_ms,
                                     track_number: track.track_number,
                                     explicit: track.explicit,
@@ -64,5 +68,102 @@ router.get(
         }
     })
 );
+
+router.get(
+    '/search',
+    asyncHandler(async (req, res) => {
+        types = ['album', 'artist', 'playlist', 'track'];
+        const { q, type, limit, offset } = req.query;
+        if (q && types.includes(type)) {
+            let config = {
+                method: "GET",
+                url: `https://api.spotify.com/v1/search?q=${q}&type=${type}&limit=${limit}&offset=${offset}`,
+                hearders: {
+                    Authorization: `Bearer ${process.env.SPTFY_ACCESS_TOKEN}`,
+                },
+            };
+            const response = await axios(config);
+            if (response.status === 200) {
+                switch (type) {
+                    case 'album':
+                        const { albums } = response.data;
+                        res.json({
+                            total: albums.total,
+                            album: Object.assign(
+                                ...albums.items.map(album => {
+                                    return {
+                                        [album.id]: {
+                                            openUrl: album.external_urls['spotify'],
+                                            name: album.name,
+                                            artists: album.artists.map(artist => artist.name),
+                                            image: album.images[0] ? album.images[0].url : '',
+                                            songs: {
+                                                total: album.total_tracks,
+                                            },
+                                        }
+                                    }
+                                })
+                            )
+                        })
+                        break;
+                    case "track":
+                        const { tracks } = response.data;
+                        res.json({
+                            total: tracks.total,
+                            track: Object.assign(
+                                ...tracks.items.map((track) => {
+                                    return {
+                                        [track.id]: {
+                                            openUrl: track.external_urls["spotify"],
+                                            image: track.album.images[0]
+                                                ? track.album.images[0].url
+                                                : "",
+                                            name: track.name,
+                                            duration: track.duration_ms,
+                                            explicit: track.explicit,
+                                            popularity: track.popularity,
+                                            artists: track.album.artists.map((artist) => {
+                                                return {
+                                                    id: artist.id,
+                                                    name: artist.name,
+                                                };
+                                            }),
+                                            album: {
+                                                id: track.album.id,
+                                                name: track.album.name,
+                                            },
+                                        },
+                                    };
+                                })
+                            ),
+                        });
+                        break;
+                    case "artist":
+                        const { artists } = response.data;
+                        res.json({
+                            total: artists.total,
+                            artist: Object.assign(
+                                ...artists.items.map((artist) => {
+                                    return {
+                                        [artist.id]: {
+                                            openUrl: artist.external_urls["spotify"],
+                                            image: artist.images[0] ? artist.images[0].url : "",
+                                            name: artist.name,
+                                            genres: artist.genres,
+                                            followers: artist.followers.total,
+                                            popularity: artist.popularity,
+                                        },
+                                    };
+                                })
+                            ),
+                        });
+                        break;
+                    default:
+                        break;
+                }
+            }
+        }
+    })
+)
 
 module.exports = router;
