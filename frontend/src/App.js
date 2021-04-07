@@ -8,6 +8,7 @@ import * as sessionActions from "./store/session";
 import Navigation from "./components/Navigation";
 import ProtectedRoute from "./components/ProtectedRoute";
 import Footer from "./components/Footer";
+import AlbumDetail from "./components/AlbumDetail";
 
 
 function App() {
@@ -45,9 +46,9 @@ function App() {
             <Navigation isLoaded={isLoaded} />
 
           </ProtectedRoute>
-          <ProtectedRoute path="/user/:id">
+          <ProtectedRoute path="/album/:id">
             <Navigation isLoaded={isLoaded} />
-
+            <AlbumDetail />
           </ProtectedRoute>
           <Redirect to="/home" />
         </Switch>
