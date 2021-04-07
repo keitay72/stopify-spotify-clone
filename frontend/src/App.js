@@ -9,6 +9,7 @@ import Navigation from "./components/Navigation";
 import ProtectedRoute from "./components/ProtectedRoute";
 import Footer from "./components/Footer";
 import AlbumDetail from "./components/AlbumDetail";
+import HomePage from "./components/Home";
 
 
 function App() {
@@ -44,7 +45,7 @@ function App() {
           </Route>
           <ProtectedRoute path="/home">
             <Navigation isLoaded={isLoaded} />
-
+            <HomePage />
           </ProtectedRoute>
           <ProtectedRoute path="/album/:id">
             <Navigation isLoaded={isLoaded} />
