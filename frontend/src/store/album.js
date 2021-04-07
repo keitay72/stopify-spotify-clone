@@ -8,7 +8,7 @@ const getAlbum = (album) => ({
 });
 
 export const addAlbum = (ids) => async (dispatch) => {
-    const res = await fetch(`/api/music/albums?albumIds=${ids}`);
+    const res = await fetch(`/api/music/albums?albumId=${ids}`);
     if (res.ok) {
         dispatch(getAlbum(res.data.albums));
     }
@@ -21,7 +21,7 @@ function reducer(state = initialState, action) {
         case GET_ALBUM:
             return {
                 ...state,
-                ...action.albums,
+                ...action.album,
             }
         default:
             return state;
