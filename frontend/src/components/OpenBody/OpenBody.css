@@ -1,0 +1,7 @@
+.openBody {
+    padding   : 30px;
+    color     : #ffffff4d;
+    flex      : 1;
+    height    : 100vh;
+    background: linear-gradient(rgb(85, 181, 95), rgba(0, 0, 0, 1));
+}

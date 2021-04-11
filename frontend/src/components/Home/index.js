@@ -11,11 +11,11 @@ const HomePage = () => {
         if (!album) {
             dispatch(addAlbum(id))
         }
-    }, [album])
+    }, [album, dispatch, id])
     return (
         <>
             <div>
-                <a href='http://localhost:3000/album/1'>
+                <a href='http://localhost:3000/open'>
                     <button>Launch Web Player</button>
                 </a>
             </div>

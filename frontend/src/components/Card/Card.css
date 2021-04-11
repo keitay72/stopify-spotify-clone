@@ -1,0 +1,16 @@
+.card-container {
+    border: 1px red solid;
+    height: 600px;
+    width : 600px;
+}
+
+.card-image {
+    border    : 1px yellow solid;
+    height    : 250px;
+    width     : 250px;
+    object-fit: cover;
+}
+
+.card-player {
+    border: 1px blue solid;
+}

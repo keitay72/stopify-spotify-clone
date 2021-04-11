@@ -1,0 +1,59 @@
+.openSidebar {
+    padding                     : 15px;
+    color                       : #ffffff4d;
+    height                      : 100vh;
+    /* flex                     : 0.2; */
+    width                       : 232px;
+    /* background-color         : white; */
+    background-color            : #040404;
+    resize                      : horizontal;
+    overflow                    : auto;
+    display                     : flex;
+    flex-direction              : column;
+}
+
+.openSidebar__logo {
+    /* padding         : 10px; */
+    object-fit         : contain;
+    /* height          : 70px; */
+    /* width           : 100px; */
+    /* margin-right    : auto; */
+    color              : white;
+    width              : 100%;
+    max-width          : 131px;
+    height             : 40px;
+}
+
+.openSidebar>hr {
+    background-color: #282828;
+    border          : none;
+    width           : 90%;
+    height          : 1px;
+}
+
+.customHandle {
+    cursor                : ew-resize;
+    /* width              : 10px;
+    height                : 100px; */
+    /* margin             : 0px -5px;
+    background            : lightblue;
+    border                : 20px solid red;
+    border-radius         : 2px;
+    text-align            : center;
+    /* z-index            : 99999; */
+    /* overflow           : hidden;
+    display               : flex;
+    align-items           : center; */
+}
+
+.customResizeBorder {
+    cursor            : ew-resize;
+    width             : 8px;
+    background        : #040404;
+    display           : flex;
+    /* z-index        : 99999; */
+    align-items       : center;
+    align-content     : center;
+    justify-content   : center;
+    overflow          : hidden;
+}
