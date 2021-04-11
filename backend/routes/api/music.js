@@ -78,90 +78,97 @@ router.get(
             let config = {
                 method: "GET",
                 url: `https://api.spotify.com/v1/search?q=${q}&type=${type}&limit=${limit}&offset=${offset}`,
-                hearders: {
+                headers: {
                     Authorization: `Bearer ${process.env.SPTFY_ACCESS_TOKEN}`,
                 },
             };
             const response = await axios(config);
             if (response.status === 200) {
-                switch (type) {
-                    case 'album':
-                        const { albums } = response.data;
-                        res.json({
-                            total: albums.total,
-                            album: Object.assign(
-                                ...albums.items.map(album => {
-                                    return {
-                                        [album.id]: {
-                                            openUrl: album.external_urls['spotify'],
-                                            name: album.name,
-                                            artists: album.artists.map(artist => artist.name),
-                                            image: album.images[0] ? album.images[0].url : '',
-                                            songs: {
-                                                total: album.total_tracks,
-                                            },
+                const defaultImage = "https://img.pngio.com/my-my-png-album-covers-500_500.png";
+                if (response.data[`${type}s`].items.length) {
+                    switch (type) {
+                        case 'album':
+                            const { albums } = response.data;
+                            res.json({
+                                total: albums.total,
+                                album: Object.assign(
+                                    ...albums.items.map(album => {
+                                        return {
+                                            [album.id]: {
+                                                openUrl: album.external_urls['spotify'],
+                                                name: album.name,
+                                                artists: album.artists.map(artist => artist.name),
+                                                image: album.images[0] ? album.images[0].url : defaultImage,
+                                                songs: {
+                                                    total: album.total_tracks,
+                                                },
+                                            }
                                         }
-                                    }
-                                })
-                            )
-                        })
-                        break;
-                    case "track":
-                        const { tracks } = response.data;
-                        res.json({
-                            total: tracks.total,
-                            track: Object.assign(
-                                ...tracks.items.map((track) => {
-                                    return {
-                                        [track.id]: {
-                                            openUrl: track.external_urls["spotify"],
-                                            image: track.album.images[0]
-                                                ? track.album.images[0].url
-                                                : "",
-                                            name: track.name,
-                                            duration: track.duration_ms,
-                                            explicit: track.explicit,
-                                            popularity: track.popularity,
-                                            artists: track.album.artists.map((artist) => {
-                                                return {
-                                                    id: artist.id,
-                                                    name: artist.name,
-                                                };
-                                            }),
-                                            album: {
-                                                id: track.album.id,
-                                                name: track.album.name,
+                                    })
+                                )
+                            })
+                            break;
+                        case "track":
+                            const { tracks } = response.data;
+                            res.json({
+                                total: tracks.total,
+                                track: Object.assign(
+                                    ...tracks.items.map((track) => {
+                                        return {
+                                            [track.id]: {
+                                                openUrl: track.external_urls["spotify"],
+                                                image: track.album.images[0]
+                                                    ? track.album.images[0].url
+                                                    : defaultImage,
+                                                name: track.name,
+                                                duration: track.duration_ms,
+                                                explicit: track.explicit,
+                                                popularity: track.popularity,
+                                                artists: track.album.artists.map((artist) => {
+                                                    return {
+                                                        id: artist.id,
+                                                        name: artist.name,
+                                                    };
+                                                }),
+                                                album: {
+                                                    id: track.album.id,
+                                                    name: track.album.name,
+                                                },
                                             },
-                                        },
-                                    };
-                                })
-                            ),
-                        });
-                        break;
-                    case "artist":
-                        const { artists } = response.data;
-                        res.json({
-                            total: artists.total,
-                            artist: Object.assign(
-                                ...artists.items.map((artist) => {
-                                    return {
-                                        [artist.id]: {
-                                            openUrl: artist.external_urls["spotify"],
-                                            image: artist.images[0] ? artist.images[0].url : "",
-                                            name: artist.name,
-                                            genres: artist.genres,
-                                            followers: artist.followers.total,
-                                            popularity: artist.popularity,
-                                        },
-                                    };
-                                })
-                            ),
-                        });
-                        break;
-                    default:
-                        break;
+                                        };
+                                    })
+                                ),
+                            });
+                            break;
+                        case "artist":
+                            const { artists } = response.data;
+                            res.json({
+                                total: artists.total,
+                                artist: Object.assign(
+                                    ...artists.items.map((artist) => {
+                                        return {
+                                            [artist.id]: {
+                                                openUrl: artist.external_urls["spotify"],
+                                                image: artist.images[0] ? artist.images[0].url : defaultImage,
+                                                name: artist.name,
+                                                genres: artist.genres,
+                                                followers: artist.followers.total,
+                                                popularity: artist.popularity,
+                                            },
+                                        };
+                                    })
+                                ),
+                            });
+                            break;
+                        default:
+                            break;
+                    }
+                } else {
+                    res.json(`No data`)
                 }
             }
+        } else {
+            res.json(`Data error`)
         }
     })
 )
