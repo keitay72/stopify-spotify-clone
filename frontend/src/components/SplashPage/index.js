@@ -1,5 +1,6 @@
 import React from 'react';
-import './SplashPage.css'
+import './SplashPage.css';
+import { Link } from 'react-router-dom';
 
 
 function SplashPage() {
@@ -13,7 +14,7 @@ function SplashPage() {
                 <h1 className="splashPage__text">
                     {title.split('').map((letter, i) => <span key={i}>{letter}</span>)}
                 </h1>
-                <a className="splashPage__button" href="http://localhost:3000/login">Login / Join</a>
+                <Link to="/login"><a className="splashPage__button">Login / Join</a></Link>
             </section>
         </div>
     );

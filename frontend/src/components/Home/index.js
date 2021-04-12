@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useParams } from 'react-router';
 import { addAlbum } from '../../store/album';
 import "./Home.css";
+import { Link } from 'react-router-dom';
 
 const HomePage = () => {
     const dispatch = useDispatch();
@@ -16,9 +17,11 @@ const HomePage = () => {
     return (
         <div className="homePage">
             <div className="homePage__button">
-                <a href='http://localhost:3000/open'>
-                    <button>Launch Web Player</button>
-                </a>
+                <Link to='/open'>
+                    <a>
+                        <button>Launch Web Player</button>
+                    </a>
+                </Link>
             </div>
             <div className="homePage__text">
                 <h1>Home Page Detail</h1>
