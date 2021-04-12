@@ -76,9 +76,10 @@ const Search = () => {
     });
 
     return (
-        <div>
-            <div>
+        <div className="search">
+            <div className="search__container">
                 <select
+                    className="search__select"
                     value={searchType}
                     onChange={(e) => setSearchType(e.target.value)}
                 >
@@ -89,6 +90,7 @@ const Search = () => {
                     ))}
                 </select>
                 <input
+                    className="search__input"
                     onKeyPress={checkKey}
                     value={searchInput}
                     onChange={(e) => setSearchInput(e.target.value)}

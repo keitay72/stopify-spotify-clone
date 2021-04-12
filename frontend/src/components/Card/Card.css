@@ -1,16 +1,37 @@
+.card__component {
+    display          : flex;
+    /* flex-direction: column; */
+}
+
 .card-container {
-    border: 1px red solid;
-    height: 600px;
-    width : 600px;
+    /* border          : 1px red solid; */
+    height             : 300px;
+    width              : 225px;
+    border-radius      : 4px;
+    background-color   : #1d1d1d;
+    /* display         : flex; */
+}
+
+.card-container:hover {
+    background-color: #282828;
 }
 
 .card-image {
-    border    : 1px yellow solid;
-    height    : 250px;
-    width     : 250px;
-    object-fit: cover;
+    /* border    : 1px yellow solid; */
+    margin    : 10px;
+    height    : 191px;
+    width     : 191px;
+    object-fit: contain;
 }
 
 .card-player {
-    border: 1px blue solid;
+    border     : 1px blue solid;
+    width      : 25px;
+    height     : 25px;
+    align-items: center;
+}
+
+.fa {
+    z-index         : 1;
+    background-color: white;
 }

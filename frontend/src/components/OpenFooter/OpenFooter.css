@@ -1,17 +1,17 @@
-.openFooter {
-    /* padding         : 20PX; */
-    color           : #ffffff4d;
-    position        : fixed;
-    display         : flex;
-    justify-content : space-between;
-    bottom          : 0;
-    height          : 80px;
-    width           : 100%;
-    background-color: #181818;
-    border-top      : 1px solid #282828;
-}
+       .openFooter {
+           /* padding         : 20PX; */
+           color           : #ffffff4d;
+           position        : fixed;
+           display         : flex;
+           justify-content : space-between;
+           bottom          : 0;
+           height          : 80px;
+           width           : 100%;
+           background-color: #181818;
+           border-top      : 1px solid #282828;
+       }
 
-.openFooter__player {
-    width : 100%;
-    border: none;
-}
+       .openFooter__player {
+           width : 100%;
+           border: none;
+       }

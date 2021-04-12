@@ -1,0 +1,63 @@
+.openSearch__genres {
+    /* position          : absolute; */
+    display           : flex;
+    /* justify-content: space-between; */
+    align-self        : flex-start;
+}
+
+.openSearch__genres.scroll {
+    margin                   : 4px, 4px;
+    padding                  : 4px;
+    /* background-color      : #08c708; */
+    width                    : 100vw;
+    overflow                 : auto;
+    white-space              : nowrap;
+}
+
+.openSearch__card {
+    /* border       : 4px solid transparent; */
+    border-radius: 8px;
+    min-width    : 385px;
+    height       : 220px;
+    margin-left  : 10px;
+    margin-right : 10px;
+    background   : linear-gradient(0deg, transparent, rgba(0, 0, 0, .4));
+}
+
+.openSearch__card>h2 {
+    font-size: 40px;
+    padding  : 16px;
+}
+
+.rock {
+    background-color: rgb(235, 30, 50);
+}
+
+.indie {
+    background-color: rgb(65, 0, 245);
+}
+
+.hiphop {
+    background-color: rgb(245, 155, 35);
+}
+
+.pop {
+    background-color: rgb(195, 240, 200);
+}
+
+.openSearch__browseCardContainer {
+    display: flex;
+}
+
+.openSearch__genreCard {
+    background: linear-gradient(0deg, transparent, rgba(0, 0, 0, .4));
+}
+
+.openSearch__genreCard {
+    background-color: rgb(180, 155, 200);
+    margin          : 10px;
+    padding         : 10px;
+    height          : 198px;
+    width           : 198px;
+    border-radius   : 8px;
+}

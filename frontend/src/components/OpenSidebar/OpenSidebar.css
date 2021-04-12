@@ -1,5 +1,5 @@
 .openSidebar {
-    padding                     : 15px;
+    /* padding                     : 15px; */
     color                       : #ffffff4d;
     height                      : 100vh;
     /* flex                     : 0.2; */
@@ -14,6 +14,7 @@
 
 .openSidebar__logo {
     /* padding         : 10px; */
+    margin             : 15px;
     object-fit         : contain;
     /* height          : 70px; */
     /* width           : 100px; */
@@ -29,6 +30,16 @@
     border          : none;
     width           : 90%;
     height          : 1px;
+}
+
+.navIcon {
+    margin-left  : 10px;
+    border-radius: 5px;
+}
+
+.navIcon:active {
+    /* margin-left     : 10px; */
+    background-color: #282828;
 }
 
 .customHandle {
