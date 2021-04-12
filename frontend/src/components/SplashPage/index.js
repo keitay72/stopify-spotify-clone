@@ -3,7 +3,7 @@ import './SplashPage.css'
 
 
 function SplashPage() {
-    const title = 'STOPPIFY';
+    const title = 'STOPIFY';
     return (
         <div className="splashPage">
             <section className="splashPage__section">

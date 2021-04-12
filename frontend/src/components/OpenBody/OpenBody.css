@@ -1,7 +1,15 @@
 .openBody {
-    padding   : 30px;
-    color     : #ffffff4d;
-    flex      : 1;
-    height    : 100vh;
-    background: linear-gradient(rgb(85, 181, 95), rgba(0, 0, 0, 1));
+    padding         : 30px;
+    color           : #fff;
+    font-family     : Arial, Helvetica, sans-serif;
+    flex            : 1;
+    height          : 100vh;
+    background-color: #181818;
+    /* background   : linear-gradient(rgb(85, 181, 95), rgba(0, 0, 0, 1)); */
+}
+
+.bodyState {
+    border : 1px solid black;
+    margin : 10px;
+    padding: 10px;
 }

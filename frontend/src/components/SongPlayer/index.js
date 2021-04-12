@@ -13,6 +13,7 @@ const SongPlayer = () => {
     return (
         isLoaded && (
             <iframe
+                className="songPlayer"
                 src={song.link}
                 frameBorder="0"
                 allowtransparency="true"
