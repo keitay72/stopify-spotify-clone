@@ -1,0 +1,24 @@
+.signupForm {
+    display         : flex;
+    justify-content : center;
+    flex-direction  : column;
+    align-items     : center;
+    background-color: black;
+    height          : 100vh;
+    color           : white;
+}
+
+.su__form {
+    display            : flex;
+    justify-content    : center;
+    flex-direction     : column;
+    align-items        : center;
+    background-color   : black;
+    /* height          : 100vh; */
+    color              : white;
+    margin             : 5px;
+}
+
+.su__button {
+    margin: 5px;
+}

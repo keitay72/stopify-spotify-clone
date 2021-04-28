@@ -6,7 +6,7 @@ const List = ({ results, type }) => {
     let list;
     if (!(Object.entries(results) == 0)) {
         list = (
-            <div>
+            <div className="card__grid">
                 {Object.entries(results.results).map((result) => {
                     switch (type) {
                         case "album":

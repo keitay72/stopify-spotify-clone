@@ -26,10 +26,10 @@ function Navigation({ isLoaded }) {
   return (
     <div className='nav-container'>
       <NavLink exact to="/home">
-        <i className="fab fa-spotify fa-2x" style={{ color: "white" }}></i>
-        <p>
+        {/* <i className="fab fa-spotify fa-2x" style={{ color: "white" }}></i> */}
+        {/* <p>
           Stopify
-        </p>
+        </p> */}
       </NavLink>
       {isLoaded && sessionLinks}
     </div>

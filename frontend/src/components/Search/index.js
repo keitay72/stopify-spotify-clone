@@ -18,14 +18,14 @@ const Search = () => {
         (state) => state.search
     );
     function getDocHeight() {
-        let D = document;
+        // let D = document;
         return Math.max(
-            D.body.scrollHeight,
-            D.documentElement.scrollHeight,
-            D.body.offsetHeight,
-            D.documentElement.offsetHeight,
-            D.body.clientHeight,
-            D.documentElement.clientHeight
+            document.body.scrollHeight,
+            document.documentElement.scrollHeight,
+            document.body.offsetHeight,
+            document.documentElement.offsetHeight,
+            document.body.clientHeight,
+            document.documentElement.clientHeight
         );
     }
 
@@ -64,7 +64,7 @@ const Search = () => {
 
     useEffect(() => {
         submitSearch()
-    }, [submitSearch, searchOffset])
+    }, [searchInput, searchOffset])
 
     useScrollPosition(() => {
         let percent = amountScrolled()

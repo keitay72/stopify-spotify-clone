@@ -1,0 +1,36 @@
+.openResults {
+    /* overflow             : scroll; */
+    display              : grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
+    justify-content      : flex-start;
+    width                : 100%;
+}
+
+.openResults__card {
+    background-color: hsla(0deg, 0%, 100%, 10%);
+    border-radius   : 2%;
+    width           : 200px;
+    height          : 320px;
+    margin          : 10px;
+    padding         : 10px;
+    transition      : 200ms color ease-in;
+}
+
+.openResults__card:hover {
+    background-color: #444444;
+}
+
+.openResults__image {
+    margin-bottom: 10px;
+}
+
+.openResults__title {
+    color        : #fff;
+    margin-bottom: 10px;
+    font-size    : medium;
+}
+
+.openResults__artist {
+    color    : #b3b3b3;
+    font-size: small;
+}

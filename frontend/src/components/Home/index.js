@@ -19,12 +19,9 @@ const HomePage = () => {
             <div className="homePage__button">
                 <Link to='/open'>
                     <a>
-                        <button>Launch Web Player</button>
+                        <button className="homePage__webPlayer">Launch Web Player</button>
                     </a>
                 </Link>
-            </div>
-            <div className="homePage__text">
-                <h1>Home Page Detail</h1>
             </div>
         </div>
     )

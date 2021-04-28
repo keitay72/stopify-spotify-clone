@@ -4,12 +4,15 @@ import session from './session';
 import album from './album';
 import song from './song';
 import search from './search';
+import open from './open';
+
 
 const rootReducer = combineReducers({
   session,
   album,
   song,
   search,
+  open,
 });
 
 let enhancer;

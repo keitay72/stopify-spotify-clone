@@ -171,6 +171,41 @@ router.get(
             res.json(`Data error`)
         }
     })
-)
+);
+
+router.get(
+    '/open',
+    asyncHandler(async (req, res) => {
+        const { genre, limit } = req.query;
+        if (genre) {
+            let config = {
+                method: "GET",
+                url: `https://api.spotify.com/v1/recommendations?seed_genres=${genre}&limit=${limit}`,
+                headers: {
+                    Authorization: `Bearer ${process.env.SPTFY_ACCESS_TOKEN}`,
+                },
+            };
+            const response = await axios(config);
+            if (response.status === 200) {
+                const defaultImage = "https://img.pngio.com/my-my-png-album-covers-500_500.png";
+                const { tracks } = response.data;
+                // res.json(tracks);
+                res.json(tracks.map((track) => {
+                    if (track.album.album_type === "ALBUM") {
+                        return {
+                            type: track.album.album_type,
+                            title: track.name,
+                            artist: track.artists[0].name,
+                            url: track.external_urls.spotify,
+                            image: track.album.images[0] ? track.album.images[0].url : defaultImage,
+                        }
+                    }
+                }))
+            }
+        } else {
+            res.json(`Data error`);
+        }
+    })
+);
 
 module.exports = router;

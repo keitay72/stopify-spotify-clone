@@ -1,15 +1,31 @@
 .card__component {
     display          : flex;
     /* flex-direction: column; */
+
 }
 
+/* .openResults__card {
+    background-color: hsla(0deg, 0%, 100%, 10%);
+    border-radius   : 2%;
+    width           : 200px;
+    height          : 320px;
+    margin          : 10px;
+    padding         : 10px;
+    transition      : 200ms color ease-in;
+}
+
+.openResults__card:hover {
+    background-color: #444444;
+} */
+
 .card-container {
-    /* border          : 1px red solid; */
-    height             : 300px;
-    width              : 225px;
-    border-radius      : 4px;
-    background-color   : #1d1d1d;
-    /* display         : flex; */
+    background-color: hsla(0deg, 0%, 100%, 10%);
+    border-radius   : 2%;
+    width           : 200px;
+    height          : 320px;
+    margin          : 10px;
+    padding         : 10px;
+    transition      : 200ms color ease-in;
 }
 
 .card-container:hover {
@@ -18,10 +34,10 @@
 
 .card-image {
     /* border    : 1px yellow solid; */
-    margin    : 10px;
-    height    : 191px;
-    width     : 191px;
-    object-fit: contain;
+    margin       : 10px;
+    height       : 180px;
+    width        : 180px;
+    /* object-fit: contain; */
 }
 
 .card-player {

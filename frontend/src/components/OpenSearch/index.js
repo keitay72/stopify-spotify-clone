@@ -1,71 +1,86 @@
 import React from 'react';
+
 import "./OpenSearch.css";
 import Search from "../Search";
+import { searchResults } from "../../store/open";
+import { useDispatch } from 'react-redux';
 
-const OpenSearch = () => {
+
+const OpenSearch = ({ setActive, setResults }) => {
+    const dispatch = useDispatch();
     const musicGenres = [
-        "Podcasts",
-        "Made For You",
-        "Charts",
-        "New Releases",
-        "Discover",
-        "Concerts",
-        "Country",
-        "Latin",
-        "Mood",
-        "Dance / Electronic",
-        "Workout",
-        "R & B",
-        "Focus",
-        "EQUAL",
-        "Stop Asian Hate",
-        "Gaming",
-        "Chill",
-        "Christian",
-        "Party",
-        "Decades",
-        "Romance",
-        "Instrumental",
-        "Alternative",
-        "Wellness",
-        "In the Car",
-        "theLINER",
-        "Pride",
-        "Sleep",
-        "Classical",
-        "Jazz",
-        "Folk & Acoustic",
-        "Soul",
-        "Black History Is Now",
-        "Spotify Singles",
-        "At Home",
-        "League of Legends",
-        "Cooking & Dining",
-        "K-Pop",
-        "Songwriters",
-        "Punk",
-        "Regional Mexican",
-        "Sports",
-        "Pop culture",
-        "Higher Ground",
-        "Blues",
-        "Arab",
-        "Desi",
-        "RADAR",
-        "Joe Rogan Experience",
-        "Anime",
-        "Tastemakers",
-        "Afro",
-        "Comedy",
-        "TV & Movies",
-        "Metal",
-        "Caribbean",
-        "Funk",
-        "Student",
-        "Commute",
-        "Kids & Family",
-        "Ramadan"
-    ]
+        "acoustic",
+        "alt-rock",
+        "alternative",
+        "bluegrass",
+        "blues",
+        "brazil",
+        "breakbeat",
+        "british",
+        "chill",
+        "classical",
+        "club",
+        "country",
+        "dance",
+        "dancehall",
+        "deep-house",
+        "disco",
+        "electronic",
+        "folk",
+        "funk",
+        "garage",
+        "gospel",
+        "groove",
+        "grunge",
+        "guitar",
+        "happy",
+        "hard-rock",
+        "heavy-metal",
+        "hip-hop",
+        "holidays",
+        "honky-tonk",
+        "house",
+        "indie",
+        "indie-pop",
+        "jazz",
+        "k-pop",
+        "latin",
+        "metal",
+        "movies",
+        "new-age",
+        "new-release",
+        "opera",
+        "party",
+        "piano",
+        "pop",
+        "punk",
+        "rainy-day",
+        "reggae",
+        "road-trip",
+        "rock",
+        "rockabilly",
+        "romance",
+        "sad",
+        "salsa",
+        "samba",
+        "show-tunes",
+        "singer-songwriter",
+        "ska",
+        "sleep",
+        "soul",
+        "soundtracks",
+        "summer",
+        "tango",
+        "techno",
+        "trance",
+        "work-out",
+    ];
+
+    const cardClick = async (genre) => {
+        setResults(await dispatch(searchResults(genre)));
+        setActive("openResults");
+    };
+
     return (
         <>
             <div className="openSearch">
@@ -103,8 +118,8 @@ const OpenSearch = () => {
                 <div className="openSearch__browseCardContainer">
                     {musicGenres.map((genre, i) => {
                         return (
-                            <div className={`openSearch__genreCard ${i}`} key={i}>
-                                <h2>{genre}</h2>
+                            <div className={`openSearch__genreCard ${i}`} key={i} onClick={() => cardClick(genre)}>
+                                <h2>{genre.replace(/\b\w/g, match => match.toUpperCase())}</h2>
                             </div>
                         )
                     })}

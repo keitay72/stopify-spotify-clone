@@ -60,7 +60,7 @@ function App() {
           </ProtectedRoute>
           <ProtectedRoute path="/search">
             <Navigation isLoaded={isLoaded} />
-            <SongPlayer />
+            {/* <SongPlayer /> */}
             <Search />
           </ProtectedRoute>
           <Redirect to="/home" />

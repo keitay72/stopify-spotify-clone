@@ -14,3 +14,10 @@
     margin: 5px;
 
 }
+
+.card__grid {
+    display              : grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
+    justify-content      : flex-start;
+    width                : 100%;
+}

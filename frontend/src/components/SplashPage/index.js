@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 
 
 function SplashPage() {
-    const title = 'STOPIFY';
+    const title = 'STOPPIFY';
     return (
         <div className="splashPage">
             <section className="splashPage__section">
@@ -14,7 +14,8 @@ function SplashPage() {
                 <h1 className="splashPage__text">
                     {title.split('').map((letter, i) => <span key={i}>{letter}</span>)}
                 </h1>
-                <Link to="/login"><a className="splashPage__button">Login / Join</a></Link>
+                <Link to="/login"><a className="splashPage__button">Login</a></Link>
+                <Link to="/signup"><a className="splashPage__join">Join</a></Link>
             </section>
         </div>
     );

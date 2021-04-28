@@ -1,7 +1,14 @@
 .nav-container {
   background-color: black;
+  display         : flex;
+  justify-content : space-between;
 }
 
 .profile-dropdown {
-  position: absolute;
+  /* position: absolute; */
+  margin: 5px;
+}
+
+.profileButton__logout {
+  margin: 5px;
 }
